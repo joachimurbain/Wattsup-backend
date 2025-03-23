@@ -14,7 +14,7 @@ public class User
     public required string Email { get; set; }
     public required string Password { get; set; }
     public bool IsActive { get; set; } = true;
-
-
     public required Role Role { get; set; }
+
+    public Store? Store { get; set; }
 }

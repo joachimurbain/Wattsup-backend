@@ -9,19 +9,21 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Wattsup.DAL.Database;
-public class WattsupContext : DbContext
+public class WattsupDbContext : DbContext
 {
 
 
     public DbSet<User> Users { get; set; }
+    public DbSet<Store> Stores { get; set; }
 
-    public WattsupContext(DbContextOptions<WattsupContext> options) : base(options) { }
+	public WattsupDbContext(DbContextOptions<WattsupDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             
             modelBuilder.ApplyConfiguration(new UserConfig());
+            modelBuilder.ApplyConfiguration(new StoreConfig());
 
-        }
+	}
     
 }
