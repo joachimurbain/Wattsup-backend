@@ -4,13 +4,11 @@ using Wattsup.DAL.Repositories.Interfaces;
 using Wattsup.Domain.Models;
 
 namespace Wattsup.BLL.Services;
-public class StoreService : BaseService<Store>, IStoreService
+public class MeterService : BaseService<Meter>, IMeterService
 {
 
 
-	public StoreService(IStoreRepository storeRepository) : base(storeRepository) { }
-
-
+	public MeterService(IMeterRepository MeterRepository) : base(MeterRepository) { }
 
 
 }

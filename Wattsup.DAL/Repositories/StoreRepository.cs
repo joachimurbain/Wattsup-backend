@@ -14,7 +14,8 @@ public class StoreRepository : BaseRepository<Store>, IStoreRepository
 	{
 		return await _dbContext.Stores
 			.Include(s => s.Manager)
-			.AsNoTracking()
+            .Include(s => s.Meters)
+            .AsNoTracking()
 			.FirstOrDefaultAsync(s => s.Id == id);
 	}
 

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Wattsup.DAL.Database;
 
@@ -11,9 +12,11 @@ using Wattsup.DAL.Database;
 namespace Wattsup.DAL.Migrations
 {
     [DbContext(typeof(WattsupDbContext))]
-    partial class WattsupDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250325140736_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,14 +34,14 @@ namespace Wattsup.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime?>("DeactivationDate")
+                    b.Property<DateTime>("DeactivationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("QrCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("StoreId")
+                    b.Property<int>("ShopId")
                         .HasColumnType("int");
 
                     b.Property<string>("Type")
@@ -50,7 +53,7 @@ namespace Wattsup.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StoreId");
+                    b.HasIndex("ShopId");
 
                     b.ToTable("Meters", (string)null);
                 });
@@ -179,7 +182,7 @@ namespace Wattsup.DAL.Migrations
                 {
                     b.HasOne("Wattsup.Domain.Models.Store", "Store")
                         .WithMany("Meters")
-                        .HasForeignKey("StoreId")
+                        .HasForeignKey("ShopId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

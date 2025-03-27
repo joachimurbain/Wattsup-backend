@@ -4,9 +4,10 @@ using Wattsup.BLL.Services.Base.Interfaces;
 namespace Wattsup.Api.Controllers.Base;
 [Route("api/[controller]")]
 [ApiController]
-public abstract class BaseDtoController<TEntity, TCreateDto, TUpdateDto, TDetailsDto, TListDto> : ControllerBase
+public abstract class BaseDtoController<TEntity,TUpdateEntity, TCreateDto, TUpdateDto, TDetailsDto, TListDto> : ControllerBase
 	where TEntity : class
-	where TCreateDto : class
+	where TUpdateEntity : class
+    where TCreateDto : class
 	where TUpdateDto : class
 	where TDetailsDto : class
 	where TListDto : class
@@ -54,11 +55,11 @@ public abstract class BaseDtoController<TEntity, TCreateDto, TUpdateDto, TDetail
 			return BadRequest(ModelState);
 		}
 
-		TEntity entity = ToUpdatedEntity(dto);
+		TUpdateEntity updateEntity = ToUpdateEntity(dto);
 
-		((dynamic)entity).Id = id;
+		((dynamic)updateEntity).Id = id;
 
-		entity = await _service.UpdateAsync(entity);
+		TEntity entity = await _service.UpdateAsync(id,updateEntity);
 		return Ok(ToDetailsDto(entity));
 	}
 
@@ -71,7 +72,7 @@ public abstract class BaseDtoController<TEntity, TCreateDto, TUpdateDto, TDetail
 
 
 	protected abstract TEntity ToEntity(TCreateDto createDto);
-	protected abstract TEntity ToUpdatedEntity(TUpdateDto dto);
+	protected abstract TUpdateEntity ToUpdateEntity(TUpdateDto dto);
 	protected abstract TDetailsDto ToDetailsDto(TEntity entity);
 	protected abstract TListDto ToListDto(TEntity entity);
 

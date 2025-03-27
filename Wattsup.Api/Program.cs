@@ -18,8 +18,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerDocumentation();
 builder.Services.AddServices();
 
+builder.Services.AddCorsPolicy();
+
 // Configure database
-string connectionString = builder.Configuration.GetConnectionString("home");
+string connectionString = builder.Configuration.GetConnectionString("vm");
 builder.Services.AddDbContext<WattsupDbContext>(options =>
 {
 	options.UseSqlServer(connectionString);
@@ -34,6 +36,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors("FFA");
 app.UseAuthorization();
 app.MapControllers();
 app.Run();

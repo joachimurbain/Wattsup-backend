@@ -15,15 +15,19 @@ public class WattsupDbContext : DbContext
 
     public DbSet<User> Users { get; set; }
     public DbSet<Store> Stores { get; set; }
+    public DbSet<Meter> Meters { get; set; }
+    public DbSet<MeterReading> MeterReadings { get; set; }
 
-	public WattsupDbContext(DbContextOptions<WattsupDbContext> options) : base(options) { }
+    public WattsupDbContext(DbContextOptions<WattsupDbContext> options) : base(options) { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
             
-            modelBuilder.ApplyConfiguration(new UserConfig());
-            modelBuilder.ApplyConfiguration(new StoreConfig());
+        modelBuilder.ApplyConfiguration(new UserConfig());
+        modelBuilder.ApplyConfiguration(new StoreConfig());
+        modelBuilder.ApplyConfiguration(new MeterConfig());
+        modelBuilder.ApplyConfiguration(new MeterReadingConfig());
 
-	}
+    }
     
 }

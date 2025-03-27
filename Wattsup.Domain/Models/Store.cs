@@ -13,8 +13,9 @@ public class Store : IEntity, IValidatable, IPatchable<StoreUpdate>
 	public bool IsActive { get; set; } = true;
 
 	public User? Manager { get; set; }
+	public List<Meter> Meters { get; set; } = [];
 
-	public void ApplyPatch(StoreUpdate patch)
+    public void ApplyPatch(StoreUpdate patch)
 	{
 		Name = patch.Name ?? Name;
 		StoreCode = patch.StoreCode ?? StoreCode;

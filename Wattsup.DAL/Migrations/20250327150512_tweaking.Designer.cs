@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Wattsup.DAL.Database;
 
@@ -11,9 +12,11 @@ using Wattsup.DAL.Database;
 namespace Wattsup.DAL.Migrations
 {
     [DbContext(typeof(WattsupDbContext))]
-    partial class WattsupDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250327150512_tweaking")]
+    partial class tweaking
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
