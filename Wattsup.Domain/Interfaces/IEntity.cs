@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Wattsup.Domain.Models;
+namespace Wattsup.Domain.Interfaces;
 public interface IEntity
 {
 	int Id { get; set; }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Wattsup.DAL.Database;
 using Wattsup.DAL.Repositories.Base.Interfaces;
-using Wattsup.Domain.Models;
+using Wattsup.Domain.Interfaces;
 
 namespace Wattsup.DAL.Repositories.Base;
 public class BaseRepository<T> : IBaseRepository<T> where T : class, IEntity

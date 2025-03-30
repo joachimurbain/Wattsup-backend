@@ -1,13 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Wattsup.Api.Controllers.Base.Helpers;
 using Wattsup.BLL.Services.Base.Interfaces;
+using Wattsup.Domain.Interfaces;
 
 namespace Wattsup.Api.Controllers.Base;
 [Route("api/[controller]")]
 [ApiController]
-public abstract class BaseDtoController<TEntity,TUpdateEntity, TCreateDto, TUpdateDto, TDetailsDto, TListDto> : ControllerBase
-	where TEntity : class
-	where TUpdateEntity : class
-    where TCreateDto : class
+public abstract class BaseDtoController<TEntity, TCreateDto, TUpdateDto, TDetailsDto, TListDto> : ControllerBase
+	where TEntity : class, IEntity
+	where TCreateDto : class
 	where TUpdateDto : class
 	where TDetailsDto : class
 	where TListDto : class
@@ -55,12 +56,13 @@ public abstract class BaseDtoController<TEntity,TUpdateEntity, TCreateDto, TUpda
 			return BadRequest(ModelState);
 		}
 
-		TUpdateEntity updateEntity = ToUpdateEntity(dto);
 
-		((dynamic)updateEntity).Id = id;
+		//var partialEntity = PatchEntityBuilder.BuildPartial<TEntity, TUpdateDto>(dto);
 
-		TEntity entity = await _service.UpdateAsync(id,updateEntity);
-		return Ok(ToDetailsDto(entity));
+		var patch = PatchEntityBuilder.BuildPartial<TEntity, TUpdateDto>(dto);
+
+		var updated = await _service.UpdateAsync(id, patch);
+		return Ok(ToDetailsDto(updated));
 	}
 
 	[HttpDelete("{id}")]
@@ -72,7 +74,6 @@ public abstract class BaseDtoController<TEntity,TUpdateEntity, TCreateDto, TUpda
 
 
 	protected abstract TEntity ToEntity(TCreateDto createDto);
-	protected abstract TUpdateEntity ToUpdateEntity(TUpdateDto dto);
 	protected abstract TDetailsDto ToDetailsDto(TEntity entity);
 	protected abstract TListDto ToListDto(TEntity entity);
 

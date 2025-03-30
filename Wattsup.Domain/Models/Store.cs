@@ -1,7 +1,7 @@
 ﻿using Wattsup.Domain.Interfaces;
 
 namespace Wattsup.Domain.Models;
-public class Store : IEntity, IValidatable, IPatchable<StoreUpdate>
+public class Store : IEntity, IValidatable
 {
 	public int Id { get; set; }
 	public required string Name { get; set; }
@@ -15,17 +15,17 @@ public class Store : IEntity, IValidatable, IPatchable<StoreUpdate>
 	public User? Manager { get; set; }
 	public List<Meter> Meters { get; set; } = [];
 
-    public void ApplyPatch(StoreUpdate patch)
-	{
-		Name = patch.Name ?? Name;
-		StoreCode = patch.StoreCode ?? StoreCode;
-		Address = patch.Address ?? Address;
-		City = patch.City ?? City;
-		Zipcode = patch.Zipcode ?? Zipcode;
-		SurfaceArea = patch.SurfaceArea ?? SurfaceArea;
-		IsActive = patch.IsActive ?? IsActive;
-		Manager = patch.Manager ?? Manager;
-	}
+	//public void ApplyPatch(StoreUpdate patch)
+	//{
+	//	Name = patch.Name ?? Name;
+	//	StoreCode = patch.StoreCode ?? StoreCode;
+	//	Address = patch.Address ?? Address;
+	//	City = patch.City ?? City;
+	//	Zipcode = patch.Zipcode ?? Zipcode;
+	//	SurfaceArea = patch.SurfaceArea ?? SurfaceArea;
+	//	IsActive = patch.IsActive ?? IsActive;
+	//	Manager = patch.Manager ?? Manager;
+	//}
 
 	public void Validate()
 	{
