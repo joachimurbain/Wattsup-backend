@@ -9,6 +9,7 @@ public class MeterReading : IEntity, IValidatable
 	public required DateTime ReadingDate { get; set; }
 	public MeterReadingSource Source { get; set; }
 
+	public int MeterId { get; set; }
 	public required Meter Meter { get; set; }
 
 
