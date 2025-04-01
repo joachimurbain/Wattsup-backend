@@ -7,17 +7,19 @@ using Wattsup.Domain.Models;
 namespace Wattsup.DAL.Repositories;
 public class StoreRepository : BaseRepository<Store>, IStoreRepository
 {
-    private WattsupDbContext _wattsupDbContext => (WattsupDbContext)_dbContext;
+	private WattsupDbContext _wattsupDbContext => (WattsupDbContext)_dbContext;
 
-    public StoreRepository(WattsupDbContext dbContext) : base(dbContext) { }
+	public StoreRepository(WattsupDbContext dbContext) : base(dbContext) { }
 
-	public override async Task<Store?> GetByIdAsync(int id)
+
+	protected override IQueryable<Store> AddReferences(IQueryable<Store> query)
 	{
-		return await _wattsupDbContext.Stores
-			.Include(s => s.Manager)
-			.Include(s => s.Meters)
-			.AsNoTracking()
-			.FirstOrDefaultAsync(s => s.Id == id);
+		return query.Include(s => s.Meters);
+	}
+
+	protected override IQueryable<Store> AddCollections(IQueryable<Store> query)
+	{
+		return query.Include(s => s.Manager);
 	}
 
 

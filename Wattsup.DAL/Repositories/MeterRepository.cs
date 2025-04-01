@@ -8,16 +8,17 @@ namespace Wattsup.DAL.Repositories;
 public class MeterRepository : BaseRepository<Meter>, IMeterRepository
 {
 
-    private WattsupDbContext _wattsupDbContext => (WattsupDbContext)_dbContext;
+	private WattsupDbContext _wattsupDbContext => (WattsupDbContext)_dbContext;
 
-    public MeterRepository(WattsupDbContext dbContext) : base(dbContext) { }
+	public MeterRepository(WattsupDbContext dbContext) : base(dbContext) { }
 
-	public override async Task<Meter?> GetByIdAsync(int id)
+	protected override IQueryable<Meter> AddReferences(IQueryable<Meter> query)
 	{
-		return await _wattsupDbContext.Meters
-			.Include(s => s.Store)
-			.Include(s => s.Readings)
-			.AsNoTracking()
-			.FirstOrDefaultAsync(s => s.Id == id);
+		return query.Include(s => s.Store);
+	}
+
+	protected override IQueryable<Meter> AddCollections(IQueryable<Meter> query)
+	{
+		return query.Include(s => s.Readings);
 	}
 }

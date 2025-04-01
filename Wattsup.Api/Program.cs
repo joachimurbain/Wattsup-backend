@@ -21,7 +21,7 @@ builder.Services.AddServices();
 builder.Services.AddCorsPolicy();
 
 // Configure database
-string connectionString = builder.Configuration.GetConnectionString("vm");
+string connectionString = builder.Configuration.GetConnectionString("home");
 builder.Services.AddDbContext<WattsupDbContext>(options =>
 {
 	options.UseSqlServer(connectionString);
