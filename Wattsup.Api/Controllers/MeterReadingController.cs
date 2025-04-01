@@ -1,5 +1,7 @@
 ﻿using CrudCore.Controllers;
+using CrudCore.Controllers.Helpers;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Wattsup.Api.DTOs.MeterReadingDTOs;
 using Wattsup.Api.DTOs.StoreDTOs;
 using Wattsup.Api.Mappers;
@@ -25,10 +27,35 @@ public class MeterReadingController : BaseDtoController<MeterReading, CreateMete
 		_dbContext = dbContext;
 	}
 
+    [HttpPut("{id}")]
+    public override async Task<ActionResult<DetailsMeterReadingDto>> Update(int id, [FromBody] UpdateMeterReadingDTO dto)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        var patch = PatchEntityBuilder.BuildPartial<MeterReading, UpdateMeterReadingDTO>(dto);
 
 
+		Meter meter = await _meterService.GetByIdAsync(dto.MeterId);
 
-	protected override DetailsMeterReadingDto ToDetailsDto(MeterReading entity)
+        var existingReading = _dbContext.ChangeTracker.Entries<MeterReading>()
+    .FirstOrDefault(e => e.Entity.Id == dto.Id);
+        if (existingReading != null)
+        {
+            existingReading.State = EntityState.Detached;
+        }
+
+        patch.PartialEntity.Meter = meter;
+        patch.UpdatedFields.Add("Meter");
+
+
+        var updated = await _service.UpdateAsync(id, patch);
+        return Ok(ToDetailsDto(updated));
+    }
+
+    protected override DetailsMeterReadingDto ToDetailsDto(MeterReading entity)
 	{
 		return entity.ToDetailsDto();
 	}
