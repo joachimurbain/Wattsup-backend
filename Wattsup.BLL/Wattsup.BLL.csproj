@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <ProjectReference Include="..\..\CrudCore\CrudCore.csproj" />
     <ProjectReference Include="..\Wattsup.Domain\Wattsup.Domain.csproj" />
     <ProjectReference Include="..\Wattsup.DAL\Wattsup.DAL.csproj" />
   </ItemGroup>

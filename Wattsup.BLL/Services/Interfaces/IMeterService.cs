@@ -1,4 +1,4 @@
-﻿using Wattsup.BLL.Services.Base.Interfaces;
+﻿using CrudCore.Services;
 using Wattsup.Domain.Models;
 
 namespace Wattsup.BLL.Services.Interfaces;

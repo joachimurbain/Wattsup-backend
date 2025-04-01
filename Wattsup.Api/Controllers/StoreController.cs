@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Wattsup.Api.Controllers.Base;
+﻿using CrudCore.Controllers;
+using Microsoft.AspNetCore.Mvc;
 using Wattsup.Api.DTOs.MeterDTOs;
 using Wattsup.Api.DTOs.StoreDTOs;
 using Wattsup.Api.Mappers;

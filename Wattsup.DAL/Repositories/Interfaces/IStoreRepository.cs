@@ -1,4 +1,5 @@
-﻿using Wattsup.DAL.Repositories.Base.Interfaces;
+﻿
+using CrudCore.Repositories;
 using Wattsup.Domain.Models;
 
 namespace Wattsup.DAL.Repositories.Interfaces;

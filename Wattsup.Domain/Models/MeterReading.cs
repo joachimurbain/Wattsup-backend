@@ -1,5 +1,6 @@
-﻿using Wattsup.Domain.CustomEnums;
-using Wattsup.Domain.Interfaces;
+﻿using CrudCore.Interfaces;
+using Wattsup.Domain.CustomEnums;
+
 
 namespace Wattsup.Domain.Models;
 public class MeterReading : IEntity, IValidatable

@@ -1,10 +1,6 @@
 ﻿using Wattsup.Domain.CustomEnums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Wattsup.Domain.Interfaces;
+using CrudCore.Interfaces;
+
 
 namespace Wattsup.Domain.Models;
 public class Meter : IEntity

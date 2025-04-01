@@ -1,4 +1,6 @@
-﻿using Wattsup.Domain.Interfaces;
+﻿
+
+using CrudCore.Interfaces;
 
 namespace Wattsup.Domain.Models;
 public class Store : IEntity, IValidatable
