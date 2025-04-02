@@ -18,19 +18,12 @@ public class StoreController : BaseDtoController<Store, CreateStoreDto, UpdateSt
 	[HttpGet("{storeId}/meters")]
 	public async Task<ActionResult<IEnumerable<DetailsMeterDTO>>> GetMetersForStore(int storeId)
 	{
-		Store store = await _service.GetByIdAsync(storeId);
+		Store store = await _service.GetByIdAsync(storeId, CrudCore.Enums.IncludeStrategy.WithCollections);
 
 
-		IEnumerable<DetailsMeterDTO> meters = store.Meters.Select(m => new DetailsMeterDTO
-		{
-			Id = m.Id,
-			Type = m.Type,
-			DeactivationDate = m.DeactivationDate,
-			QrCode = m.QrCode,
-			StoreId = m.Store.Id,
-			Uuid = m.Uuid
 
-		});
+		IEnumerable<DetailsMeterDTO> meters = store.Meters.Select(m => m.ToDetailsDto()).ToList();
+
 
 
 

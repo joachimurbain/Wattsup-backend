@@ -14,12 +14,13 @@ public class StoreRepository : BaseRepository<Store>, IStoreRepository
 
 	protected override IQueryable<Store> AddReferences(IQueryable<Store> query)
 	{
-		return query.Include(s => s.Meters);
+		return query.Include(s => s.Manager);
 	}
 
 	protected override IQueryable<Store> AddCollections(IQueryable<Store> query)
 	{
-		return query.Include(s => s.Manager);
+		return query.Include(s => s.Meters).ThenInclude(r => r.Readings);
+
 	}
 
 

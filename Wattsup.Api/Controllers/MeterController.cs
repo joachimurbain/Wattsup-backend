@@ -1,5 +1,6 @@
 ﻿using CrudCore.Controllers;
 using Microsoft.AspNetCore.Mvc;
+using Wattsup.Api.DTOs.MeterDTOs;
 using Wattsup.Api.DTOs.StoreDTOs;
 using Wattsup.Api.Mappers;
 using Wattsup.BLL.Services.Interfaces;
@@ -8,7 +9,7 @@ using Wattsup.Domain.Models;
 namespace Wattsup.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-public class MeterController : BaseEntityController<Meter>
+public class MeterController : BaseDtoController<Meter, DetailsMeterDTO, DetailsMeterDTO, DetailsMeterDTO, DetailsMeterDTO>
 {
 	private readonly IMeterService _meterService;
 
@@ -25,4 +26,18 @@ public class MeterController : BaseEntityController<Meter>
 		return Ok(meterReadings);
 	}
 
+	protected override DetailsMeterDTO ToDetailsDto(Meter entity)
+	{
+		return entity.ToDetailsDto();
+	}
+
+	protected override Meter ToEntity(DetailsMeterDTO createDto)
+	{
+		throw new NotImplementedException();
+	}
+
+	protected override DetailsMeterDTO ToListDto(Meter entity)
+	{
+		return entity.ToDetailsDto();
+	}
 }
