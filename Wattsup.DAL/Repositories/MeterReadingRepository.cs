@@ -9,16 +9,4 @@ public class MeterReadingRepository : BaseRepository<MeterReading>, IMeterReadin
 {
 	public MeterReadingRepository(WattsupDbContext dbContext) : base(dbContext) { }
 
-
-
-
-	//public async override Task<MeterReading> UpdateAsync(MeterReading entity)
-	//{
-	//	return await _dbContext.MeterReadings
-	//		.Include(s => s.Meter)
-	//		.AsNoTracking();
-	//}
-
-
-
 }
