@@ -38,7 +38,7 @@ public class MeterReadingController : BaseDtoController<MeterReading, CreateMete
 		var patch = PatchEntityBuilder.BuildPartial<MeterReading, UpdateMeterReadingDTO>(dto);
 
 
-		Meter meter = await _meterService.GetByIdAsync(dto.MeterId, IncludeStrategy.ReferencesOnly);
+		Meter meter = await _meterService.GetByIdAsync(dto.MeterId, TrackingBehavior.Tracking);
 		patch.PartialEntity.Meter = meter;
 		patch.UpdatedFields.Add("Meter");
 

@@ -12,13 +12,10 @@ public class MeterRepository : BaseRepository<Meter>, IMeterRepository
 
 	public MeterRepository(WattsupDbContext dbContext) : base(dbContext) { }
 
-	protected override IQueryable<Meter> AddReferences(IQueryable<Meter> query)
-	{
-		return query.Include(s => s.Store);
-	}
-
-	protected override IQueryable<Meter> AddCollections(IQueryable<Meter> query)
-	{
-		return query.Include(s => s.Readings);
-	}
+    protected override IQueryable<Meter> AddIncludes(IQueryable<Meter> query)
+    {
+        return query
+				.Include(s => s.Store)
+				.Include(s => s.Readings); 
+    }
 }

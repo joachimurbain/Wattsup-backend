@@ -18,7 +18,7 @@ public class StoreController : BaseDtoController<Store, CreateStoreDto, UpdateSt
 	[HttpGet("{storeId}/meters")]
 	public async Task<ActionResult<IEnumerable<DetailsMeterDTO>>> GetMetersForStore(int storeId)
 	{
-		Store store = await _service.GetByIdAsync(storeId, CrudCore.Enums.IncludeStrategy.WithCollections);
+		Store store = await _service.GetByIdAsync(storeId, CrudCore.Enums.TrackingBehavior.WithCollections);
 
 
 
