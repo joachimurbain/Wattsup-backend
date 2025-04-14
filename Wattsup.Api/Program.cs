@@ -1,3 +1,4 @@
+using CrudCore.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 using Wattsup.Api.Extensions;
@@ -17,6 +18,9 @@ builder.Services
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerDocumentation();
+
+builder.Services.AddCrudCore();
+
 builder.Services.AddServices();
 
 builder.Services.AddCorsPolicy();

@@ -9,10 +9,8 @@ public class DetailsMeterDTO
 	public Guid Uuid { get; set; }
 	public MeterType Type { get; set; }
 	public DateTime? DeactivationDate { get; set; }
-	public required string QrCode { get; set; }
-
-	public required int StoreId { get; set; }
-
+	public string QrCode { get; set; }
+	public int StoreId { get; set; }
 	public DateTime LastReading { get; set; }
 	//public List<MeterReading> Readings { get; set; } = [];
 

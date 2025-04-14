@@ -12,16 +12,10 @@ public class StoreRepository : BaseRepository<Store>, IStoreRepository
 	public StoreRepository(WattsupDbContext dbContext) : base(dbContext) { }
 
 
-	protected override IQueryable<Store> AddReferences(IQueryable<Store> query)
+	protected override IQueryable<Store> AddIncludes(IQueryable<Store> query)
 	{
-		return query.Include(s => s.Manager);
+		return query
+			.Include(s => s.Manager)
+			.Include(s => s.Meters).ThenInclude(r => r.Readings);
 	}
-
-	protected override IQueryable<Store> AddCollections(IQueryable<Store> query)
-	{
-		return query.Include(s => s.Meters).ThenInclude(r => r.Readings);
-
-	}
-
-
 }
