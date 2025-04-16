@@ -9,7 +9,7 @@ using Wattsup.Domain.Models;
 namespace Wattsup.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-public class MeterController : BaseDtoController<Meter, DetailsMeterDTO, DetailsMeterDTO, DetailsMeterDTO, DetailsMeterDTO>
+public class MeterController : BaseDtoController<Meter, CreateMeterDTO, DetailsMeterDTO, DetailsMeterDTO, DetailsMeterDTO>
 {
 	private readonly IMeterService _meterService;
 

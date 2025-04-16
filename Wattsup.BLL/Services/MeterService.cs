@@ -11,4 +11,10 @@ public class MeterService : BaseService<Meter>, IMeterService
 	public MeterService(IMeterRepository MeterRepository) : base(MeterRepository) { }
 
 
+	public override Task<Meter> AddAsync(Meter entity)
+	{
+		entity.QrCode = "abc";
+		return base.AddAsync(entity);
+	}
+
 }
